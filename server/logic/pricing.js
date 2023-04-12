@@ -1,30 +1,38 @@
-const ProductType = require('../models/product').ProductType;
+const { ProductType } = require("../models/product");
+const products = require("../data/products-data");
 
-function calculateAnnualCost(productType, consumption) {
-    let baseCosts = 0;
-    let additionalKwhCost = 0;
+function calculateAnnualCost(consumption) {
+    const tariffs = [];
+    console.log(Object.entries(products));
   
-    switch (productType) {
-      case ProductType.BASIC_ELECTRICITY_TARIFF:
-        baseCosts = 5;
-        additionalKwhCost = 0.22;
-        break;
-      case ProductType.PACKAGED_TARIFF:
-        if (consumption <= 4000) {
-          baseCosts = 800;
-        } else {
-          baseCosts = 800 + (consumption - 4000) * 0.3;
-        }
-        break;
-      default:
-        throw new Error(`Unknown product type: ${productType}`);
+    for (const [key, product] of Object.entries(products)) {
+        console.log('key', key, product);
+  
+      switch (product.type) {
+        case ProductType.BASIC_ELECTRICITY_TARIFF:
+            console.log('A',product)
+          annualCost = product.baseCost * 12 + consumption * product.additionalKwhCost * 0.01;
+          break;
+        case ProductType.PACKAGED_TARIFF:
+            console.log('B',product)
+          if (consumption <= product.includedKwh) {
+            annualCost = product.baseCost;
+          } else {
+            annualCost = product.baseCost + (consumption - product.includedKwh) * product.additionalKwhCost * 0.01;
+          }
+          break;
+        default:
+          throw new Error(`Unknown product type: ${value}`);
+      }
+  
+      tariffs.push({
+        ...product,
+        annualCost: annualCost.toFixed(2),
+      });
     }
   
-    const annualCost = baseCosts * 12 + consumption * additionalKwhCost;
-    return annualCost;
+    console.log(tariffs);
+    return tariffs;
   }
-  
-  module.exports = {
-    ProductType,
-    calculateAnnualCost
-  };
+
+module.exports = calculateAnnualCost;

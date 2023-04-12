@@ -10,7 +10,7 @@ class Product {
       this.baseCost = baseCost
       this.additionalKwhCost = additionalKwhCost
       this.includedKwh = includedKwh
-      
+
       switch (this.type) {
         case ProductType.BASIC_ELECTRICITY_TARIFF:
           this.calculationModel = 'Basic electricity tariff';
@@ -24,4 +24,4 @@ class Product {
     }
   }
   
-  module.exports = Product
+  module.exports = {Product, ProductType}
