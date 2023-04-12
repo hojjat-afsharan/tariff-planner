@@ -3,7 +3,6 @@ const app = express();
 
 const productRoutes = require("./routes/products");
 const tariffRoutes = require("./routes/tariffs");
-console.log(productRoutes, tariffRoutes);
 
 app.use("/products", productRoutes);
 app.use("/tariffs", tariffRoutes);
