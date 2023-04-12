@@ -8,6 +8,7 @@ router.get("/", async (req, res) => {
   const consumption = req.query.consumption;
   if (!consumption) {
     res.status(400).send("Missing consumption");
+    return;
   }
   res.status(200).send(tariffCalculator(consumption));
 });
