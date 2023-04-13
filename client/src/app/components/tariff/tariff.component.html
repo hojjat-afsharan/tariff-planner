@@ -17,7 +17,7 @@
     </form>
     <div *ngIf="products$ | async" class="products-container">
       <h2>Electricity Tariffs</h2>
-      <div class="card-container">
+      <div class="card-container" [ngClass]="{ 'small-screen': isSmallScreen }">
         <mat-card *ngFor="let product of products$ | async" class="product-card">
           <mat-card-header>
             <mat-card-title>{{ product.calculationModel }}</mat-card-title>
