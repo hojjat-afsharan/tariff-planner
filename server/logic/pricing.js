@@ -25,7 +25,7 @@ function calculateAnnualCost(consumption) {
         annualCost: annualCost.toFixed(2),
       });
     }
-  
+  console.log(tariffs)
     return tariffs;
   }
 

@@ -1,17 +1,26 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ReplaySubject, map, tap } from 'rxjs';
+import { Product } from '../models/product.model';
+import { DataService } from './data.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TariffService {
 
-  private readonly tariffsUrl = 'http://localhost:3000/tariffs';
+  private _products$ = new ReplaySubject<Product[]>(1);
+  public products$ = this._products$.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private dataService: DataService) {}
 
-  getTariffs(consumption: number): Observable<any> {
-    return this.http.get<any>(`${this.tariffsUrl}?consumption=${consumption}`);
+  getProducts(consumption: number){
+    this.dataService
+      .fetchProducts$(consumption)
+      .pipe(
+        map((productsDTO) =>
+          productsDTO.map((productDTO) => new Product(productDTO))
+        ),
+        tap((products) => this._products$.next(products))
+      ).subscribe();
   }
 }

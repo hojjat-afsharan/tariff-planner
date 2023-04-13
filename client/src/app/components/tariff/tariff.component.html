@@ -8,14 +8,16 @@
       </div>
       <button type="submit">View Tariffs</button>
     </form>
-    <div *ngIf="tariffs">
+    <div *ngIf="products$ | async">
       <h2 class="subtitle">Electricity Tariffs</h2>
-      <ul class="tariffs">
-        <li *ngFor="let tariff of tariffs">
-          <h3>{{tariff.name}}</h3>
-          <p>Annual Cost: {{tariff.annualCost}} €/year</p>
+      <ul class="products">
+        <li *ngFor="let product of products$ | async">
+          <h3>{{product.calculationModel}}</h3>
+          <p>Annual Cost: {{product.annualCost}} €/year</p>
         </li>
       </ul>
     </div>
   </div>
 </div>
+
+{{products$ | async | json}}
