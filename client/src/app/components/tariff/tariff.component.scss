@@ -1,0 +1,68 @@
+.background {
+  background-color: #f2f2f2;
+  padding: 50px 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+
+    label {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+
+  button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0062cc;
+    }
+  }
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .product-card {
+    margin: 0 10px;
+  }
+}

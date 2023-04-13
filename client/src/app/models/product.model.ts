@@ -15,23 +15,22 @@ export class ProductDTO {
     this.includedKwh = productDTO.includedKwh;
     this.calculationModel = productDTO.calculationModel;
     this.annualCost = productDTO.annualCost;
-    console.log('ProductDTO', productDTO);
   }
 }
 
 export class Product extends ProductDTO {
 
   public cost: number;
-  public calculationMode: CalculationMode;
+  public calculationMode: CalculationModel;
   constructor(productDTO: ProductDTO) {
     super(productDTO);
     this.cost = productDTO.annualCost ? parseFloat(productDTO.annualCost) : 0;
-    this.calculationMode = productDTO.calculationModel as CalculationMode;
+    this.calculationMode = productDTO.calculationModel as CalculationModel;
   }
 
 }
 
-export enum CalculationMode {
+export enum CalculationModel {
   BASIC_ELECTRITCITY_TARIFF = 'Basic electricity tariff',
   PACKAGED_TARIFF = 'Packaged tariff'
 }

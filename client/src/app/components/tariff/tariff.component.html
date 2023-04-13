@@ -1,23 +1,34 @@
 <div class="background">
   <div class="container">
-    <h1 class="title">Electricity Prices Platform</h1>
-    <form [formGroup]="consumptionForm" (ngSubmit)="onSubmit()">
+    <h2 class="title">Electricity Prices Platform</h2>
+    <form [formGroup]="consumptionForm" (ngSubmit)="onSubmit()" class="form">
       <div class="form-group">
-        <label for="consumption">Consumption (kWh/year):</label>
-        <input type="number" id="consumption" formControlName="consumption">
+        <label for="consumption" class="form-label">Consumption (kWh/year):</label>
+        <input type="number" id="consumption" formControlName="consumption" class="form-control" />
+        <mat-error *ngIf="consumptionForm.get('consumption')?.hasError('required')">
+          Consumption is required
+        </mat-error>
       </div>
-      <button type="submit">View Tariffs</button>
+      <button type="submit" mat-button color="primary" [disabled]="!consumptionForm.valid">
+        View Tariffs
+      </button>
+
+
     </form>
-    <div *ngIf="products$ | async">
-      <h2 class="subtitle">Electricity Tariffs</h2>
-      <ul class="products">
-        <li *ngFor="let product of products$ | async">
-          <h3>{{product.calculationModel}}</h3>
-          <p>Annual Cost: {{product.annualCost}} €/year</p>
-        </li>
-      </ul>
+    <div *ngIf="products$ | async" class="products-container">
+      <h2>Electricity Tariffs</h2>
+      <div class="card-container">
+        <mat-card *ngFor="let product of products$ | async" class="product-card">
+          <mat-card-header>
+            <mat-card-title>{{ product.calculationModel }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="product-price">
+              Annual Cost: {{ product.annualCost }} €/year
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>
-
-{{products$ | async | json}}

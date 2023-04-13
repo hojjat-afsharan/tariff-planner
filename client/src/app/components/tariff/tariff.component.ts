@@ -12,6 +12,7 @@ import { TariffService } from 'src/app/services/tariff.service';
 export class TariffComponent implements OnInit {
   consumptionForm!: FormGroup;
   consumption!: number;
+public readonly maxConsumption = 1000000;
 
   products$ = this.tariffService.products$.pipe(
     filter((products) => !!products)
@@ -22,7 +23,7 @@ export class TariffComponent implements OnInit {
   ngOnInit(): void {
     this.consumptionForm = this.fb.group({
       consumption: [
-        ''
+        '1000', [Validators.required, Validators.min(0), Validators.max(this.maxConsumption)]
       ],
     });
   }
