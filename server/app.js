@@ -10,6 +10,10 @@ const productRoutes = require("./routes/products");
 const tariffRoutes = require("./routes/tariffs");
 const notFoundRoutes = require("./routes/not-found");
 
+app.get('/', function(req, res){
+  res.redirect('/products');
+});
+
 app.use("/products", productRoutes);
 app.use("/tariffs", tariffRoutes);
 app.use(notFoundRoutes);
