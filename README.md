@@ -6,3 +6,5 @@ Node js
 
 ### Frontend
 Angular
+
+### trying to dockerize it
